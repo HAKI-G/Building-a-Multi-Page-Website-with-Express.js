@@ -3,26 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog</title>
+    <title>Blog | Node.js File Server</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="flex flex-col items-center justify-center min-h-screen bg-gray-100 text-gray-900">
-    <h1 class="text-4xl font-bold mb-4">Blog Posts</h1>
-    <div id="posts" class="w-full max-w-2xl bg-white p-6 rounded-lg shadow-lg"></div>
+<body class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white">
+    <h1 class="text-4xl font-bold mb-4 drop-shadow-lg">Blog Posts</h1>
+    
+    <nav class="bg-white bg-opacity-10 px-6 py-2 rounded-lg shadow-lg mb-6">
+        <a href="/" class="mx-4 text-lg font-semibold hover:text-gray-300 transition duration-300">Home</a> |
+        <a href="/about" class="mx-4 text-lg font-semibold hover:text-gray-300 transition duration-300">About</a> |
+        <a href="/blog" class="mx-4 text-lg font-semibold hover:text-gray-300 transition duration-300">Blog</a> |
+        <a href="/contact" class="mx-4 text-lg font-semibold hover:text-gray-300 transition duration-300">Contact</a>
+    </nav>
+
+    <div id="posts" class="w-full max-w-2xl bg-white bg-opacity-20 p-6 rounded-lg shadow-lg"></div>
 
     <script>
         async function fetchPosts() {
             try {
-                const response = await fetch("/blog");
+                const response = await fetch("/api/blog"); // Fetch from /api/blog
                 const posts = await response.json();
                 const postsContainer = document.getElementById("posts");
 
                 posts.forEach(post => {
                     const postElement = document.createElement("div");
-                    postElement.className = "mb-4 p-4 border-b border-gray-300";
+                    postElement.className = "mb-4 p-4 border-b border-white border-opacity-50";
                     postElement.innerHTML = `
-                        <h2 class="text-2xl font-semibold">${post.title}</h2>
-                        <p class="text-gray-700">${post.content}</p>
+                        <h2 class="text-2xl font-semibold text-white">${post.title}</h2>
+                        <p class="text-gray-200">${post.content}</p>
                     `;
                     postsContainer.appendChild(postElement);
                 });
